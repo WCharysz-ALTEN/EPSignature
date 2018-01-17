@@ -9,7 +9,7 @@
 import UIKit
 
 open class EPSignatureView: UIView {
-    
+
     // MARK: - Private Vars
     
     fileprivate var bezierPoints = [CGPoint](repeating: CGPoint(), count: 5)
@@ -46,7 +46,7 @@ open class EPSignatureView: UIView {
         bezierPath.stroke()
         strokeColor.setStroke()
         bezierPath.stroke()
-        
+
     }
     
     
@@ -68,7 +68,7 @@ open class EPSignatureView: UIView {
     }
     
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+
         if let currentPoint = touchPoint(touches) {
             isSigned = true
             bezierPoints[0] = currentPoint
@@ -80,7 +80,7 @@ open class EPSignatureView: UIView {
         if let currentPoint = touchPoint(touches) {
             bezierCounter += 1
             bezierPoints[bezierCounter] = currentPoint
-            
+
             //Smoothing is done by Bezier Equations where curves are calculated based on four concurrent  points drawn
             if bezierCounter == 4 {
                 bezierPoints[3] = CGPoint(x: (bezierPoints[2].x + bezierPoints[4].x) / 2 , y: (bezierPoints[2].y + bezierPoints[4].y) / 2)
@@ -122,7 +122,7 @@ open class EPSignatureView: UIView {
     //MARK: Utility Methods
     
     /** Clears the drawn paths in the canvas
-     */
+    */
     open func clear() {
         isSigned = false
         bezierPath.removeAllPoints()
@@ -145,13 +145,13 @@ open class EPSignatureView: UIView {
             
             return signature
         }
-        
+
         return nil
     }
     
     /** Returns the rect of signature image drawn in the canvas. This can very very useful in croping out the unwanted empty areas in the signature image returned.
      */
-    
+
     open func getSignatureBoundsInCanvas() -> CGRect {
         return CGRect(x: minPoint.x, y: minPoint.y, width: maxPoint.x - minPoint.x, height: maxPoint.y - minPoint.y)
     }
@@ -163,7 +163,7 @@ open class EPSignatureView: UIView {
             NSKeyedArchiver.archiveRootObject(bezierPath, toFile: localPath)
         }
     }
-    
+
     open func loadSignature(_ filePath: String) {
         if let path = getPath(filePath) {
             isSigned = true
