@@ -8,14 +8,14 @@
 
 import UIKit
 
-// MARK: - EPSignatureDelegate
+    // MARK: - EPSignatureDelegate
 @objc public protocol EPSignatureDelegate {
     @objc optional    func epSignature(_: EPSignatureViewController, didCancel error : NSError)
     @objc optional    func epSignature(_: EPSignatureViewController, didSign signatureImage : UIImage, boundingRect: CGRect)
 }
 
 open class EPSignatureViewController: UIViewController {
-    
+
     // MARK: - IBOutlets
     
     @IBOutlet weak var switchSaveSignature: UISwitch!
@@ -33,12 +33,12 @@ open class EPSignatureViewController: UIViewController {
     open weak var signatureDelegate: EPSignatureDelegate?
     open var subtitleText = "Sign Here"
     open var tintColor = UIColor.defaultTintColor()
-    
+
     // MARK: - Life cycle methods
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(EPSignatureViewController.onTouchCancelButton))
         cancelButton.tintColor = tintColor
         self.navigationItem.leftBarButtonItem = cancelButton
@@ -93,7 +93,7 @@ open class EPSignatureViewController: UIViewController {
         let bundle = Bundle(for: EPSignatureViewController.self)
         super.init(nibName: "EPSignatureViewController", bundle: bundle)
     }
-    
+
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -104,7 +104,7 @@ open class EPSignatureViewController: UIViewController {
         signatureDelegate?.epSignature?(self, didCancel: NSError(domain: "EPSignatureDomain", code: 1, userInfo: [NSLocalizedDescriptionKey:"User not signed"]))
         dismiss(animated: true, completion: nil)
     }
-    
+
     @objc func onTouchDoneButton() {
         if let signature = signatureView.getSignatureAsImage() {
             if let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first, switchSaveSignature.isOn {
@@ -140,10 +140,9 @@ open class EPSignatureViewController: UIViewController {
         }
         present(action, animated: true, completion: nil)
     }
-    
+
     @objc func onTouchClearButton() {
         signatureView.clear()
     }
     
 }
-

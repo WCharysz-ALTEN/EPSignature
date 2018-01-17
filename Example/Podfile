@@ -1,11 +1,11 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'EPSignature_Example', :exclusive => true do
-  pod "EPSignature", :path => "../"
+target 'EPSignature_Example' do
+  pod "EPSignature"
 end
 
-target 'EPSignature_Tests', :exclusive => true do
-  pod "EPSignature", :path => "../"
+target 'EPSignature_Tests' do
+  pod "EPSignature"
 
 end
